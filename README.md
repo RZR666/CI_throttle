@@ -8,8 +8,8 @@ I was looking for a Codeigniter login throttling library and couldn't find a sim
 *first clean up old logins
 *Count matching IP address and type (optional, useful if more than one throttle type. IE: logins, submissions)
 *Compare to limit
-**If over limit, show error 503
-**if not over, return number of attempts
+..*If over limit, show error 503
+..*if not over, return number of attempts
 
 ##Usage
 ###install
@@ -39,7 +39,8 @@ CodeIgniter 2 or 3
 MySQL database or equivalent
 MY_Model from avenirer (find it on github. It's great.) or equivalent
 
-table called throttles with the following:
+database table called throttles with the following:
+```
 CREATE TABLE throttles
 (
   id INT UNSIGNED PRIMARY KEY,
@@ -48,3 +49,4 @@ CREATE TABLE throttles
   updated_at DATETIME,
   type INT UNSIGNED
 );
+```
