@@ -1,0 +1,52 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+class Throttle
+{
+    public function __construct()
+    {
+        $this->CI =& get_instance();
+        $this->CI->load->database();
+        $this->CI->load->model('throttle_model', 'throttle');
+    }
+
+    /**
+     * throttles multiple connections attempts to prevent abuse
+     * @param int $type type of throttle to perform.
+     *
+     */
+    public function throttle($type = 0, $limit = 10, $timeout = 30)
+    {
+        //clean up login attempts older than specified time
+        $this->throttle_cleanup($timeout);
+
+        $data = new stdClass();
+        $data->ip = $this->CI->input->ip_address();
+        $data->type = $type;
+
+        $this->CI->throttle->insert($data);
+
+        $attempts = $this->CI->throttle->where(['ip' => $this->CI->input->ip_address(), 'type' => $type])->count();
+
+        if ($attempts > $limit) {
+            show_error('too many attempts. tTry back after ' . $timeout . ' minutes.', 503, 'Attempt failed');
+        }
+
+        return $attempts; // return current number of attempted logins
+    }
+
+    /**
+     * Cleans up old throttling attempts based on throttle timeout
+     *
+     * @param $timeout
+     * @return result of query
+     */
+    public function throttle_cleanup($timeout)
+    {
+        $formatted_current_time = date("Y-m-d H:i:s", strtotime((int)$timeout * -1) . 'minutes');
+        $modifier =  ' BETWEEN "1970-00-00 00:00:00" and ' . $formatted_current_time;
+
+        return $this->CI->throttle->where('created_at', $modifier)->delete();
+    }
+
+
+}
