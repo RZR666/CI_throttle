@@ -17,12 +17,18 @@ I was looking for a Codeigniter login throttling library and couldn't find a sim
 
 ###initialize
 in your controller __construct() or in a function, call 
-```$this->load->library('throttle');```
+```
+$this->load->library('throttle');
+```
 
 ###Use
-```$attempts = $this->throttle(1); //run throttle check from throttle library, type 1```
+```
+$attempts = $this->throttle(1); //run throttle check from throttle library, type 1
+```
 or
-```$attempts = $this->throttle(5, 5, 60); //run throttle check from throttle library, type 5, limit 5 attempts every hour```
+```
+$attempts = $this->throttle(5, 5, 60); //run throttle check from throttle library, type 5, limit 5 attempts every hour
+```
 
 
 ##Usage
