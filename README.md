@@ -14,7 +14,12 @@ I was looking for a Codeigniter login throttling library and couldn't find a sim
 
 ##Usage
 ###install
-* put MY_model, Throttle_model and Throttle library in correct locations (see file structure above)
+
+put files into proper codeigniter directories
+* MY_Model [https://github.com/avenirer/CodeIgniter-MY_Model](download from here. The file in the folder will not work.)
+* Throttle_model
+* Throttle library 
+in correct locations (see file structure above)
 
 ###initialize
 in your controller __construct() or in a function, call 
