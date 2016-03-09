@@ -6,16 +6,15 @@ I was looking for a Codeigniter login throttling library and couldn't find a sim
 
 ##How it works
 
-1 first clean up old logins
-2 Count matching IP address and type (optional, useful if more than one throttle type. IE: logins, submissions)
-3 Compare to limit
-
-..+If over limit, show error 503
-..+if not over, return number of attempts
+* first clean up old logins
+* Count matching IP address and type (optional, useful if more than one throttle type. IE: logins, submissions)
+* Compare to limit
+  * If over limit, show error 503
+  * if not over, return number of attempts
 
 ##Usage
 ###install
-+ put MY_model, Throttle_model and Throttle library in correct locations (see file structure above)
+* put MY_model, Throttle_model and Throttle library in correct locations (see file structure above)
 
 ###initialize
 in your controller __construct() or in a function, call 
